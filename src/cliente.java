@@ -10,7 +10,9 @@ public class cliente {
             //Declaracion de variables
             int RMIPort;
             String hostName;
-            int numeroPares,numeroHilos, puntos;
+            int numeroPares,numeroHilos, paresPorHilo;
+            Thread[] ArrayDeHilos;
+            VariableCompartida n=new VariableCompartida();
             //Fin de declaracion de variables
 
             InputStreamReader is = new InputStreamReader(System.in);
@@ -30,15 +32,31 @@ public class cliente {
             //Se empieza el método de MonteCarlo
             System.out.println("Introduzca el numero de pares generados para efectuar el metodo de MonteCarlo");
             numeroPares=Integer.parseInt(br.readLine());
+            do{
+                System.out.println("Introduzca el numero de hilos para realizar la operacion (maximo 4)");
+                numeroHilos=Integer.parseInt(br.readLine());
+            }while(numeroHilos>4);
+
            // System.out.println("Introduzca el numero de hilos para realizar el calculo (maximo 8)");
             //  numeroHilos=Integer.parseInt(br.readLine());
 
 
+            ArrayDeHilos=new Thread[numeroHilos];
+            //Se calcula cuantos pares va a calcular cada hilo
+            for(int i=0;i<numeroHilos;i++){
+                ArrayDeHilos[i]=new threadCliente("Hilo " +(i+1) ,numeroPares/numeroHilos, h,n);
+            }
+            for(int i=0;i<numeroHilos;i++){
+                ArrayDeHilos[i].start();
+            }
+            //Se espera a que todos los hilos acaben para mostrar el resultado
+            for(int i=0;i<numeroHilos;i++){
+                ArrayDeHilos[i].join();
+            }
 
-            puntos=h.npuntos(numeroPares);
-            System.out.println("puntos:  " + puntos);
+            System.out.println("puntos:  " + n.getValor());
             System.out.println("numeroPares:  " + numeroPares);
-            float division= 4*(puntos/numeroPares);
+            float division=  (4*((float)n.getValor()/(float)numeroPares));
             System.out.println("Aproximacion Pi: " + division);
 
 
