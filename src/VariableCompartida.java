@@ -8,7 +8,7 @@ public class VariableCompartida {
         valor= 0;
     }
 
-    public synchronized void Sumar (int sumando) {
+    public synchronized void Sumar (long sumando) {
         while (!disponible){
             try{
                 wait();

@@ -1,23 +1,26 @@
-
+import java.rmi.Naming;
 
 public class threadCliente extends Thread {
 
     //Variables
-    private int numeroOperaciones;
-    private MonteCarloInterface h;
+    private long numeroOperaciones;
+    private String registro;
     private VariableCompartida n;
     //Constructor
-    public threadCliente(String name, int numeroOperaciones, MonteCarloInterface h, VariableCompartida n) {
+    public threadCliente(String name, long numeroOperaciones, String resgistro, VariableCompartida n) {
         super(name);
         this.numeroOperaciones=numeroOperaciones;
-        this.h=h;
+        this.registro=resgistro;
         this.n=n;
     }
     //Ejecucion
     @Override
     public void run() {
-        int nAux;
+        long nAux;
         try{
+            MonteCarloInterface h =
+                    (MonteCarloInterface) Naming.lookup(registro);
+            System.out.println("Registro del hilo "+registro+" completado" );
             nAux=h.npuntos(numeroOperaciones);
             n.Sumar(nAux);
 

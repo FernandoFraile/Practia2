@@ -16,7 +16,7 @@ public class MonteCarloImpl extends UnicastRemoteObject
 
 
     @Override
-    public int npuntos(int NumeroPares) throws RemoteException {
+    public int npuntos(long NumeroPares) throws RemoteException {
         Date semilla= new Date();
         Float par[]=new Float[2];
         int puntos=0; //Variable para ver cuantos puntos caen en el area
