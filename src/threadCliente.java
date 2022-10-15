@@ -25,7 +25,7 @@ public class threadCliente extends Thread {
             n.Sumar(nAux);
 
         }catch (Exception e) {
-            System.out.println("Exception in cliente: " + e);
+            System.out.println("Excepcion en hilo "+getName()+": "+ e);
         }
 
     }

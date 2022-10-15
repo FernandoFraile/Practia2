@@ -54,7 +54,7 @@ public class servidor {
     // This method lists the names registered with a Registry object
     private static void listRegistry(String registryURL)
             throws RemoteException, MalformedURLException {
-        System.out.println("Registry " + registryURL + " contains: ");
+        System.out.println("Registro " + registryURL);
         String [ ] names = Naming.list(registryURL);
         for (int i=0; i < names.length; i++)
             System.out.println(names[i]);

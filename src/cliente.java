@@ -21,22 +21,20 @@ public class cliente {
             BufferedReader br = new BufferedReader(is);
             //Se empieza el método de MonteCarlo
             System.out.println("Introduzca el numero de pares generados para efectuar el metodo de MonteCarlo");
-            numeroPares=Integer.parseInt(br.readLine());
+            numeroPares=Long.parseLong(br.readLine());
 
-            System.out.println("Introduzca el numero de hilos para realizar la operacion (maximo 4)");
+            System.out.println("Introduzca el numero de hilos para realizar la operacion ");
             numeroHilos=Integer.parseInt(br.readLine());
             ArrayDeHilos=new Thread[numeroHilos];
 
             //Se ve el resto de la division de numeroPares/numeroHilos, ya que puede no ser entera
             resto=Math.floorMod( numeroPares, numeroHilos);
 
-            System.out.println("Resto: "+resto);
             for(int i=0;i<numeroHilos; i++){
                 System.out.println("Introduce el nombre del Host del registro RMI, para el hilo: "+i);
                 hostName = br.readLine();
                 System.out.println("Introduce el puerto para el registro RMI");
                 String portNum = br.readLine();
-                RMIPort = Integer.parseInt(portNum);
                 String registryURL =
                         "rmi://" + hostName+ ":" + portNum + "/MonteCarlo";
                 // find the remote object and cast it to an interface object
